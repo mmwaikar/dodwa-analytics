@@ -19,10 +19,10 @@ let main argv =
     // printfn "Print books Sales: %A" pBooksData
     // printfn "Ebooks Sales: %A" eBooksData
 
-    // (drawQuarterWiseChart (packtLibData, "PacktLib Subscriptions")).Show()
-    // (drawQuarterWiseChart (othersData, "Other Subscriptions")).Show()
-    // (drawQuarterWiseChart (pBooksData, "Print books")).Show()
-    // (drawQuarterWiseChart (eBooksData, "Ebooks")).Show()
+    (drawQuarterWiseChart (packtLibData, "PacktLib Subscriptions")).Show()
+    (drawQuarterWiseChart (othersData, "Other Subscriptions")).Show()
+    (drawQuarterWiseChart (pBooksData, "Print books")).Show()
+    (drawQuarterWiseChart (eBooksData, "Ebooks")).Show()
     (drawYearlyChart (packtLibData, othersData, pBooksData, eBooksData)).Show()
     (drawTotalChart (packtLibData, othersData, pBooksData, eBooksData)).Show()
 
