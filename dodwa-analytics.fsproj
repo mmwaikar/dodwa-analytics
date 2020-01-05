@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="ExcelDataReader" Version="3.4.1.0" />
+    <PackageReference Include="ExcelDataReader.DataSet" Version="3.4.1" />
     <PackageReference Include="ExcelProvider" Version="1.0.1" />
   </ItemGroup>
 

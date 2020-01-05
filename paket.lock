@@ -2,7 +2,9 @@ STORAGE: NONE
 RESTRICTION: || (== netcoreapp3.0) (== netstandard2.0) (== netstandard2.1)
 NUGET
   remote: https://api.nuget.org/v3/index.json
-    ExcelDataReader (3.4.1.0)
+    ExcelDataReader (3.4.1)
+    ExcelDataReader.DataSet (3.4.1)
+      ExcelDataReader (>= 3.4.1)
     ExcelProvider (1.0.1)
       System.Text.Encoding.CodePages (>= 4.5)
     FSharp.Core (4.7)

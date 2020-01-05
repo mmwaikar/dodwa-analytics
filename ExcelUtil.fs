@@ -15,14 +15,18 @@ type Subscription =
     { PacktLib: int32
       Others: int32 }
 
-type Sales = 
+type Sales =
     { Subscriptions: Subscription
       Books: BookCopies }
 
 type Sheet2015 = ExcelFile<"data/books-sold-copy-2-jan-2020.xlsx", "2015">
+
 type Sheet2016 = ExcelFile<"data/books-sold-copy-2-jan-2020.xlsx", "2016">
+
 type Sheet2017 = ExcelFile<"data/books-sold-copy-2-jan-2020.xlsx", "2017">
+
 type Sheet2018 = ExcelFile<"data/books-sold-copy-2-jan-2020.xlsx", "2018">
+
 type Sheet2019 = ExcelFile<"data/books-sold-copy-2-jan-2020.xlsx", "2019">
 
 let years = seq { 2015 .. 2019 }
@@ -52,9 +56,11 @@ let years = seq { 2015 .. 2019 }
 
 let readSheet (sheet2015: Sheet2015) =
     let rows = sheet2015.Data
-    let packtLibRow = rows |> Seq.find (fun row -> row.``Till Date ->``.ToString() = PacktLib)
-    let othersRow = rows |> Seq.find (fun row -> row.``Till Date ->``.ToString() = Others)
-    let printBooksRow = rows |> Seq.find (fun row -> row.``Till Date ->``.ToString() = PrintBooks)
-    let eBooksRow = rows |> Seq.find (fun row -> row.``Till Date ->``.ToString() = EBooks)
+    // let packtLibRow = rows |> Seq.find (fun row -> row.``Till Date ->``.ToString() = PacktLib)
+    // let othersRow = rows |> Seq.find (fun row -> row.``Till Date ->``.ToString() = Others)
+    // let printBooksRow = rows |> Seq.find (fun row -> row.``Till Date ->``.ToString() = PrintBooks)
+    // let eBooksRow = rows |> Seq.find (fun row -> row.``Till Date ->``.ToString() = EBooks)
 
-    packtLibRow.Q1
+    // packtLibRow.Q1
+    rows |> Seq.head
+ 
