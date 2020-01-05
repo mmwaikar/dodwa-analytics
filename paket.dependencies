@@ -6,3 +6,5 @@ nuget ExcelDataReader
 nuget ExcelDataReader.DataSet
 nuget ExcelProvider
 nuget FSharp.Data
+nuget XPlot.GoogleCharts
+nuget XPlot.Plotly
