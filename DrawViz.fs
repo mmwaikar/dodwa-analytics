@@ -39,7 +39,7 @@ let drawQuarterWiseChart (sales: QuarterWiseYearlySales, titlePrefix: string) =
     let options =
         Options
             (title = titlePrefix, hAxis = Axis(title = "Year", titleTextStyle = TextStyle(color = "red")),
-             vAxis = Axis(title = "Sales", titleTextStyle = TextStyle(color = "blue")), seriesType = "bars")
+             vAxis = Axis(title = "Sales", titleTextStyle = TextStyle(color = "green")), seriesType = "bars")
 
     [ q1Sales; q2Sales; q3Sales; q4Sales ]
     |> Chart.Combo
@@ -85,7 +85,7 @@ let drawYearlyChart (packtQuarterlySales: QuarterWiseYearlySales, othersQuarterl
         Options
             (title = "Sales of Data Oriented Development with AngularJS",
              hAxis = Axis(title = "Year", titleTextStyle = TextStyle(color = "red")),
-             vAxis = Axis(title = "Sales", titleTextStyle = TextStyle(color = "blue")), seriesType = "bars")
+             vAxis = Axis(title = "Sales", titleTextStyle = TextStyle(color = "green")), seriesType = "bars")
 
     [ packtLibSales; othersSales; pBooksSales; eBooksSales ]
     |> Chart.Combo
@@ -99,19 +99,25 @@ let drawTotalChart (packtQuarterlySales: QuarterWiseYearlySales, othersQuarterly
     let pBooksYearlySales = getYearlySales pBooksQuarterlySales
     let eBooksYearlySales = getYearlySales eBooksQuarterlySales
 
-    let totalSales =
-        [ items.Item(0), getTotalSales packtYearlySales
-          items.Item(1), getTotalSales othersYearlySales
-          items.Item(2), getTotalSales pBooksYearlySales
-          items.Item(3), getTotalSales eBooksYearlySales ]
+    let totalPacktSales = [ "Subscription PacktLib", (getTotalSales packtYearlySales) ]
+    let totalOthersSales = [ "Subscription Others", (getTotalSales othersYearlySales) ]
+    let totalPBookSales = [ "Print Books", (getTotalSales pBooksYearlySales) ]
+    let totalEBookSales = [ "Ebooks", (getTotalSales eBooksYearlySales) ]
+
+    // let totalSales =
+    //     [ "Subscription PacktLib", (getTotalSales packtYearlySales)
+    //       "Subscription Others", (getTotalSales othersYearlySales)
+    //       "Print Books", (getTotalSales pBooksYearlySales)
+    //       "Ebooks", (getTotalSales eBooksYearlySales) ]
+    // printfn "Total sales: %A" totalSales
 
     let options =
         Options
             (title = "Sales of Data Oriented Development with AngularJS",
-             hAxis = Axis(title = "Year", titleTextStyle = TextStyle(color = "red")),
-             vAxis = Axis(title = "Sales", titleTextStyle = TextStyle(color = "blue")), seriesType = "bars")
+             vAxis = Axis(title = "Item", titleTextStyle = TextStyle(color = "red")),
+             hAxis = Axis(title = "Sales", titleTextStyle = TextStyle(color = "green")))
 
-    [ totalSales ]
-    |> Chart.Combo
+    [ totalPacktSales; totalOthersSales; totalPBookSales; totalEBookSales ]
+    |> Chart.Bar
     |> Chart.WithOptions options
     |> Chart.WithLabels items
