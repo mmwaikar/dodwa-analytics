@@ -2,24 +2,23 @@ module Types
 
 open FSharp.Interop.Excel
 
-type BookCopies =
-    { Print: int32
-      EBook: int32 }
+type QuarterlySales =
+    { Q1: double
+      Q2: double
+      Q3: double
+      Q4: double }
 
-type Subscription =
-    { PacktLib: int32
-      Others: int32 }
+type YearlySales =
+    { Y2015: QuarterlySales
+      Y2016: QuarterlySales
+      Y2017: QuarterlySales
+      Y2018: QuarterlySales
+      Y2019: QuarterlySales }
 
-type Sales =
-    { Subscriptions: Subscription
-      Books: BookCopies }
+type SheetPacktLib = ExcelFile<"data/books-sold-copy-2-jan-2020.xlsx", "PacktLib">
 
-type Sheet2015 = ExcelFile<"data/books-sold-copy-2-jan-2020.xlsx", "2015">
+type SheetOthers = ExcelFile<"data/books-sold-copy-2-jan-2020.xlsx", "Others">
 
-type Sheet2016 = ExcelFile<"data/books-sold-copy-2-jan-2020.xlsx", "2016">
+type SheetPbooks = ExcelFile<"data/books-sold-copy-2-jan-2020.xlsx", "Pbooks">
 
-type Sheet2017 = ExcelFile<"data/books-sold-copy-2-jan-2020.xlsx", "2017">
-
-type Sheet2018 = ExcelFile<"data/books-sold-copy-2-jan-2020.xlsx", "2018">
-
-type Sheet2019 = ExcelFile<"data/books-sold-copy-2-jan-2020.xlsx", "2019">
+type SheetEbooks = ExcelFile<"data/books-sold-copy-2-jan-2020.xlsx", "Ebooks">
