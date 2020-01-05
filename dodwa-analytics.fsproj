@@ -7,8 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="old/OldTypes.fs" />
+    <Compile Include="old/OldExcelUtil.fs" />
     <Compile Include="Types.fs" />
-    <Compile Include="OldExcelUtil.fs" />
     <Compile Include="ExcelUtil.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>

@@ -1,7 +1,7 @@
 module OldExcelUtil
 
 open FSharp.Interop.Excel
-open Types
+open OldTypes
 
 let PacktLib = "Subscription PacktLib"
 let Others = "Subscription Others"
