@@ -8,12 +8,19 @@ type QuarterlySales =
       Q3: double
       Q4: double }
 
-type YearlySales =
+type QuarterWiseYearlySales =
     { Y2015: QuarterlySales
       Y2016: QuarterlySales
       Y2017: QuarterlySales
       Y2018: QuarterlySales
       Y2019: QuarterlySales }
+
+type YearlySales =
+    { Y2015: double
+      Y2016: double
+      Y2017: double
+      Y2018: double
+      Y2019: double }
 
 type SheetPacktLib = ExcelFile<"data/books-sold-copy-2-jan-2020.xlsx", "PacktLib">
 

@@ -43,11 +43,11 @@ let getPacktLibData =
           Q3 = row2019.Q3 :?> double
           Q4 = row2019.Q4 :?> double }
 
-    { Y2015 = sales2015
-      Y2016 = sales2016
-      Y2017 = sales2017
-      Y2018 = sales2018
-      Y2019 = sales2019 }
+    { QuarterWiseYearlySales.Y2015 = sales2015
+      QuarterWiseYearlySales.Y2016 = sales2016
+      QuarterWiseYearlySales.Y2017 = sales2017
+      QuarterWiseYearlySales.Y2018 = sales2018
+      QuarterWiseYearlySales.Y2019 = sales2019 }
 
 let getOthersData =
     let sheet = SheetOthers()
@@ -90,11 +90,11 @@ let getOthersData =
           Q3 = row2019.Q3 :?> double
           Q4 = row2019.Q4 :?> double }
 
-    { Y2015 = sales2015
-      Y2016 = sales2016
-      Y2017 = sales2017
-      Y2018 = sales2018
-      Y2019 = sales2019 }
+    { QuarterWiseYearlySales.Y2015 = sales2015
+      QuarterWiseYearlySales.Y2016 = sales2016
+      QuarterWiseYearlySales.Y2017 = sales2017
+      QuarterWiseYearlySales.Y2018 = sales2018
+      QuarterWiseYearlySales.Y2019 = sales2019 }
 
 let getPBooksData =
     let sheet = SheetPbooks()
@@ -137,11 +137,11 @@ let getPBooksData =
           Q3 = row2019.Q3 :?> double
           Q4 = row2019.Q4 :?> double }
 
-    { Y2015 = sales2015
-      Y2016 = sales2016
-      Y2017 = sales2017
-      Y2018 = sales2018
-      Y2019 = sales2019 }
+    { QuarterWiseYearlySales.Y2015 = sales2015
+      QuarterWiseYearlySales.Y2016 = sales2016
+      QuarterWiseYearlySales.Y2017 = sales2017
+      QuarterWiseYearlySales.Y2018 = sales2018
+      QuarterWiseYearlySales.Y2019 = sales2019 }
 
 let getEBooksData =
     let sheet = SheetEbooks()
@@ -184,8 +184,24 @@ let getEBooksData =
           Q3 = row2019.Q3 :?> double
           Q4 = row2019.Q4 :?> double }
 
-    { Y2015 = sales2015
-      Y2016 = sales2016
-      Y2017 = sales2017
-      Y2018 = sales2018
-      Y2019 = sales2019 }            
+    { QuarterWiseYearlySales.Y2015 = sales2015
+      QuarterWiseYearlySales.Y2016 = sales2016
+      QuarterWiseYearlySales.Y2017 = sales2017
+      QuarterWiseYearlySales.Y2018 = sales2018
+      QuarterWiseYearlySales.Y2019 = sales2019 }
+
+let getYearlySales (quarterWiseYearlySales: QuarterWiseYearlySales) =
+    let totalSales2015 = quarterWiseYearlySales.Y2015.Q1 + quarterWiseYearlySales.Y2015.Q2 + quarterWiseYearlySales.Y2015.Q3 + quarterWiseYearlySales.Y2015.Q4
+    let totalSales2016 = quarterWiseYearlySales.Y2016.Q1 + quarterWiseYearlySales.Y2016.Q2 + quarterWiseYearlySales.Y2016.Q3 + quarterWiseYearlySales.Y2016.Q4
+    let totalSales2017 = quarterWiseYearlySales.Y2017.Q1 + quarterWiseYearlySales.Y2017.Q2 + quarterWiseYearlySales.Y2017.Q3 + quarterWiseYearlySales.Y2017.Q4
+    let totalSales2018 = quarterWiseYearlySales.Y2018.Q1 + quarterWiseYearlySales.Y2018.Q2 + quarterWiseYearlySales.Y2018.Q3 + quarterWiseYearlySales.Y2018.Q4
+    let totalSales2019 = quarterWiseYearlySales.Y2019.Q1 + quarterWiseYearlySales.Y2019.Q2 + quarterWiseYearlySales.Y2019.Q3 + quarterWiseYearlySales.Y2019.Q4
+
+    { YearlySales.Y2015 = totalSales2015
+      YearlySales.Y2016 = totalSales2016
+      YearlySales.Y2017 = totalSales2017
+      YearlySales.Y2018 = totalSales2018
+      YearlySales.Y2019 = totalSales2019 }
+
+let getTotalSales (yearlySales: YearlySales) =
+    yearlySales.Y2015 + yearlySales.Y2016 + yearlySales.Y2017 + yearlySales.Y2018 + yearlySales.Y2019
