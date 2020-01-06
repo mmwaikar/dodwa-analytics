@@ -5,6 +5,7 @@ open ExcelUtil
 open XPlot.GoogleCharts
 
 let quartersInAYear = [ "Q1"; "Q2"; "Q3"; "Q4" ]
+let yearsInSales = [ "2015"; "2016"; "2017"; "2018"; "2019" ]
 let items = [ "Subscription PacktLib"; "Subscription Others"; "Print Books"; "Ebooks" ]
 
 let drawQuarterWiseChart (sales: QuarterWiseYearlySales, titlePrefix: string) =
@@ -38,7 +39,7 @@ let drawQuarterWiseChart (sales: QuarterWiseYearlySales, titlePrefix: string) =
 
     let options =
         Options
-            (title = titlePrefix, hAxis = Axis(title = "Year", titleTextStyle = TextStyle(color = "red")),
+            (title = titlePrefix + " (per quarter per year)", hAxis = Axis(title = "Year", titleTextStyle = TextStyle(color = "red")),
              vAxis = Axis(title = "Sales", titleTextStyle = TextStyle(color = "green")), seriesType = "bars")
 
     [ q1Sales; q2Sales; q3Sales; q4Sales ]
@@ -48,38 +49,11 @@ let drawQuarterWiseChart (sales: QuarterWiseYearlySales, titlePrefix: string) =
 
 let drawYearlyChart (packtQuarterlySales: QuarterWiseYearlySales, othersQuarterlySales: QuarterWiseYearlySales,
                      pBooksQuarterlySales: QuarterWiseYearlySales, eBooksQuarterlySales: QuarterWiseYearlySales) =
-    let packtYearlySales = getYearlySales packtQuarterlySales
-    let othersYearlySales = getYearlySales othersQuarterlySales
-    let pBooksYearlySales = getYearlySales pBooksQuarterlySales
-    let eBooksYearlySales = getYearlySales eBooksQuarterlySales
+    let (packtYearlySales, othersYearlySales, pBooksYearlySales, eBooksYearlySales) =
+        getYearlySalesForAll (packtQuarterlySales, othersQuarterlySales, pBooksQuarterlySales, eBooksQuarterlySales)
 
-    let packtLibSales =
-        [ "2015", packtYearlySales.Y2015
-          "2016", packtYearlySales.Y2016
-          "2017", packtYearlySales.Y2017
-          "2018", packtYearlySales.Y2018
-          "2019", packtYearlySales.Y2019 ]
-
-    let othersSales =
-        [ "2015", othersYearlySales.Y2015
-          "2016", othersYearlySales.Y2016
-          "2017", othersYearlySales.Y2017
-          "2018", othersYearlySales.Y2018
-          "2019", othersYearlySales.Y2019 ]
-
-    let pBooksSales =
-        [ "2015", pBooksYearlySales.Y2015
-          "2016", pBooksYearlySales.Y2016
-          "2017", pBooksYearlySales.Y2017
-          "2018", pBooksYearlySales.Y2018
-          "2019", pBooksYearlySales.Y2019 ]
-
-    let eBooksSales =
-        [ "2015", eBooksYearlySales.Y2015
-          "2016", eBooksYearlySales.Y2016
-          "2017", eBooksYearlySales.Y2017
-          "2018", eBooksYearlySales.Y2018
-          "2019", eBooksYearlySales.Y2019 ]
+    let (packtLibSalesWithLabel, othersSalesWithLabel, pBooksSalesWithLabel, eBooksSalesWithLabel) =
+        getYearlySalesLabelledByYearForAll (packtYearlySales, othersYearlySales, pBooksYearlySales, eBooksYearlySales)
 
     let options =
         Options
@@ -87,17 +61,33 @@ let drawYearlyChart (packtQuarterlySales: QuarterWiseYearlySales, othersQuarterl
              hAxis = Axis(title = "Year", titleTextStyle = TextStyle(color = "red")),
              vAxis = Axis(title = "Sales", titleTextStyle = TextStyle(color = "green")), seriesType = "bars")
 
-    [ packtLibSales; othersSales; pBooksSales; eBooksSales ]
+    [ packtLibSalesWithLabel; othersSalesWithLabel; pBooksSalesWithLabel; eBooksSalesWithLabel ]
     |> Chart.Combo
     |> Chart.WithOptions options
     |> Chart.WithLabels items
 
-let drawTotalChart (packtQuarterlySales: QuarterWiseYearlySales, othersQuarterlySales: QuarterWiseYearlySales,
+let drawLineChart (packtQuarterlySales: QuarterWiseYearlySales, othersQuarterlySales: QuarterWiseYearlySales,
                      pBooksQuarterlySales: QuarterWiseYearlySales, eBooksQuarterlySales: QuarterWiseYearlySales) =
-    let packtYearlySales = getYearlySales packtQuarterlySales
-    let othersYearlySales = getYearlySales othersQuarterlySales
-    let pBooksYearlySales = getYearlySales pBooksQuarterlySales
-    let eBooksYearlySales = getYearlySales eBooksQuarterlySales
+    let (packtYearlySales, othersYearlySales, pBooksYearlySales, eBooksYearlySales) =
+        getYearlySalesForAll (packtQuarterlySales, othersQuarterlySales, pBooksQuarterlySales, eBooksQuarterlySales)
+
+    let (packtLibSalesWithLabel, othersSalesWithLabel, pBooksSalesWithLabel, eBooksSalesWithLabel) =
+        getYearlySalesLabelledByYearForAll (packtYearlySales, othersYearlySales, pBooksYearlySales, eBooksYearlySales)
+
+    let options =
+        Options
+            (title = "Sales trend of Data Oriented Development with AngularJS",
+             legend = Legend(position = "bottom"), height = 640, width = 1280, pointShape = "triangle")
+
+    [ packtLibSalesWithLabel; othersSalesWithLabel; pBooksSalesWithLabel; eBooksSalesWithLabel ]
+    |> Chart.Line
+    |> Chart.WithOptions options
+    |> Chart.WithLabels items
+
+let drawTotalChart (packtQuarterlySales: QuarterWiseYearlySales, othersQuarterlySales: QuarterWiseYearlySales,
+                    pBooksQuarterlySales: QuarterWiseYearlySales, eBooksQuarterlySales: QuarterWiseYearlySales) =
+    let (packtYearlySales, othersYearlySales, pBooksYearlySales, eBooksYearlySales) =
+        getYearlySalesForAll (packtQuarterlySales, othersQuarterlySales, pBooksQuarterlySales, eBooksQuarterlySales)
 
     let totalPacktSales = [ items.Item(0), (getTotalSales packtYearlySales) ]
     let totalOthersSales = [ items.Item(1), (getTotalSales othersYearlySales) ]
@@ -106,7 +96,7 @@ let drawTotalChart (packtQuarterlySales: QuarterWiseYearlySales, othersQuarterly
 
     let options =
         Options
-            (title = "Sales of Data Oriented Development with AngularJS",
+            (title = "Total sales of Data Oriented Development with AngularJS",
              hAxis = Axis(title = "Sales", titleTextStyle = TextStyle(color = "green")),
              vAxis = Axis(title = "Item", titleTextStyle = TextStyle(color = "red")))
 
@@ -114,3 +104,42 @@ let drawTotalChart (packtQuarterlySales: QuarterWiseYearlySales, othersQuarterly
     |> Chart.Bar
     |> Chart.WithOptions options
     |> Chart.WithLabels items
+
+let drawYearWiseStackedChart (packtQuarterlySales: QuarterWiseYearlySales, othersQuarterlySales: QuarterWiseYearlySales,
+                              pBooksQuarterlySales: QuarterWiseYearlySales, eBooksQuarterlySales: QuarterWiseYearlySales) =
+    let (packtYearlySales, othersYearlySales, pBooksYearlySales, eBooksYearlySales) =
+        getYearlySalesForAll (packtQuarterlySales, othersQuarterlySales, pBooksQuarterlySales, eBooksQuarterlySales)
+
+    let options =
+        Options
+            (title = "Sales of Data Oriented Development with AngularJS (stacked)", isStacked = true,
+             hAxis = Axis(title = "Sales", titleTextStyle = TextStyle(color = "green")),
+             vAxis = Axis(title = "Year", titleTextStyle = TextStyle(color = "red")))
+
+    let (packtLibSalesWithLabel, othersSalesWithLabel, pBooksSalesWithLabel, eBooksSalesWithLabel) =
+        getYearlySalesLabelledByYearForAll (packtYearlySales, othersYearlySales, pBooksYearlySales, eBooksYearlySales)
+
+    [ packtLibSalesWithLabel; othersSalesWithLabel; pBooksSalesWithLabel; eBooksSalesWithLabel ]
+    |> Chart.Bar
+    |> Chart.WithOptions options
+    |> Chart.WithLabels items
+
+/// does not work yet
+let drawItemWiseStackedChart (packtQuarterlySales: QuarterWiseYearlySales, othersQuarterlySales: QuarterWiseYearlySales,
+                              pBooksQuarterlySales: QuarterWiseYearlySales, eBooksQuarterlySales: QuarterWiseYearlySales) =
+    let (packtYearlySales, othersYearlySales, pBooksYearlySales, eBooksYearlySales) =
+        getYearlySalesForAll (packtQuarterlySales, othersQuarterlySales, pBooksQuarterlySales, eBooksQuarterlySales)
+
+    let (salesWith2015Label, salesWith2016Label, salesWith2017Label, salesWith2018Label, salesWith2019Label) =
+        getYearlySalesLabelledByItemForAll (packtYearlySales, othersYearlySales, pBooksYearlySales, eBooksYearlySales)
+
+    let options =
+        Options
+            (title = "Sales of Data Oriented Development with AngularJS", isStacked = true,
+             hAxis = Axis(title = "Sales", titleTextStyle = TextStyle(color = "green")),
+             vAxis = Axis(title = "Item", titleTextStyle = TextStyle(color = "red")))
+
+    [ salesWith2015Label; salesWith2016Label; salesWith2017Label; salesWith2018Label; salesWith2019Label ]
+    |> Chart.Bar
+    |> Chart.WithOptions options
+    |> Chart.WithLabels yearsInSales

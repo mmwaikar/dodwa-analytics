@@ -38,19 +38,19 @@ let years = seq { 2015 .. 2019 }
 // let getPacktLibSubscriptions (row: Row) =
 //     let q1Copies = row.
 
-let readSheet (sheet2015: Sheet2015) =
-    let data = sheet2015.Data
-    let rows = List.ofSeq (data)
-    // let packtLibRow = rows |> List.find (fun row -> row.``Till Date ->``.ToString() = PacktLib)
-    // let othersRow =
-    //     rows |> Seq.find (fun row -> not (isNull (row.``Till Date ->``)) && row.``Till Date ->``.ToString() = Others)
-    // let printBooksRow = rows |> Seq.find (fun row -> row.``Till Date ->``.ToString() = PrintBooks)
-    // let eBooksRow = rows |> Seq.find (fun row -> row.``Till Date ->``.ToString() = EBooks)
+// let readSheet (sheet2015: Sheet2015) =
+//     let data = sheet2015.Data
+//     let rows = List.ofSeq (data)
+//     // let packtLibRow = rows |> List.find (fun row -> row.``Till Date ->``.ToString() = PacktLib)
+//     // let othersRow =
+//     //     rows |> Seq.find (fun row -> not (isNull (row.``Till Date ->``)) && row.``Till Date ->``.ToString() = Others)
+//     // let printBooksRow = rows |> Seq.find (fun row -> row.``Till Date ->``.ToString() = PrintBooks)
+//     // let eBooksRow = rows |> Seq.find (fun row -> row.``Till Date ->``.ToString() = EBooks)
 
-    let othersRow = rows.Item(OthersRowIndex)
-    let others = othersRow.Q1
-    printfn "Others in Q1 2015: %s" others
-    // printfn "PacktLib in Q1 2015: %A" othersRow.Q1
-    printfn "Total rows: %d" rows.Length
-    rows.Item(0)
+//     let othersRow = rows.Item(OthersRowIndex)
+//     let others = othersRow.Q1
+//     printfn "Others in Q1 2015: %s" others
+//     // printfn "PacktLib in Q1 2015: %A" othersRow.Q1
+//     printfn "Total rows: %d" rows.Length
+//     rows.Item(0)
  
