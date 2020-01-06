@@ -22,10 +22,10 @@ type YearlySales =
       Y2018: double
       Y2019: double }
 
-type SheetPacktLib = ExcelFile<"data/books-sold-copy-2-jan-2020.xlsx", "PacktLib">
+type SheetPacktLib = ExcelFile<"data/books-sold-as-on-2-jan-2020.xlsx", "PacktLib">
 
-type SheetOthers = ExcelFile<"data/books-sold-copy-2-jan-2020.xlsx", "Others">
+type SheetOthers = ExcelFile<"data/books-sold-as-on-2-jan-2020.xlsx", "Others">
 
-type SheetPbooks = ExcelFile<"data/books-sold-copy-2-jan-2020.xlsx", "Pbooks">
+type SheetPbooks = ExcelFile<"data/books-sold-as-on-2-jan-2020.xlsx", "Pbooks">
 
-type SheetEbooks = ExcelFile<"data/books-sold-copy-2-jan-2020.xlsx", "Ebooks">
+type SheetEbooks = ExcelFile<"data/books-sold-as-on-2-jan-2020.xlsx", "Ebooks">
