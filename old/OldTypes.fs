@@ -14,12 +14,14 @@ type Sales =
     { Subscriptions: Subscription
       Books: BookCopies }
 
-type Sheet2015 = ExcelFile<"data/books-sold-as-on-2-jan-2020.xlsx", "2015">
+type Sheet2015 = ExcelFile<"data/books-sold-as-on-20-mar-2021.xlsx", "2015">
 
-type Sheet2016 = ExcelFile<"data/books-sold-as-on-2-jan-2020.xlsx", "2016">
+type Sheet2016 = ExcelFile<"data/books-sold-as-on-20-mar-2021.xlsx", "2016">
 
-type Sheet2017 = ExcelFile<"data/books-sold-as-on-2-jan-2020.xlsx", "2017">
+type Sheet2017 = ExcelFile<"data/books-sold-as-on-20-mar-2021.xlsx", "2017">
 
-type Sheet2018 = ExcelFile<"data/books-sold-as-on-2-jan-2020.xlsx", "2018">
+type Sheet2018 = ExcelFile<"data/books-sold-as-on-20-mar-2021.xlsx", "2018">
 
-type Sheet2019 = ExcelFile<"data/books-sold-as-on-2-jan-2020.xlsx", "2019">
+type Sheet2019 = ExcelFile<"data/books-sold-as-on-20-mar-2021.xlsx", "2019">
+
+type Sheet2020 = ExcelFile<"data/books-sold-as-on-20-mar-2021.xlsx", "2020">
